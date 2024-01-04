@@ -1,7 +1,7 @@
 version: '3'
 
 volumes:
-  data-base;
+  data-base:
 
 services;
   web:
@@ -11,7 +11,8 @@ services;
     volumes:
       - '.:/docker'
     environment:
-      - 'DATABASE_PASSWORD=postgres'
+      - 'DATABASE_USER=postgres'
+      - 'DATABASE_PASSWORD=password'
     tty: true
     stdin_open: true
     depends_on:
@@ -20,7 +21,9 @@ services;
       - db
 
   db:
-    image: postgres
-    version: 12
+    image: postgres:12
+    environment:
+      - 'DATABASE_USER=postgres'
+      - 'DATABASE_PASSWORD=password'
     volumes:
       - 'db-data:/var/lib/postgresql/data'
