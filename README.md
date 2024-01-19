@@ -30,6 +30,18 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
+初回起動時は、以下のようにexecコマンドを用いて、DBを作成してください。
+
+```
+$ docker-compose exec web rails db:create
+```
+
+その後、migrateも実行してください。
+
+```
+$ docker-compose exec web rails db:migrate
+```
+
 以上で環境構築が完了します。
 ブラウザで　
 http://localhost:3000　
