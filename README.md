@@ -1,24 +1,55 @@
-# README
+# 環境構築の方法
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+このRailsプロジェクトはDocker化されております。
+実行するためには以下の手順を行ってください。
 
-Things you may want to cover:
+1 git cloneを実行する
 
-* Ruby version
+以下のようにターミナルでgit cloneを実行し、必要なファイルをすべてcloneしてください。
 
-* System dependencies
+```
+$ git clone https://github.com/hie3-336/rails-docker
+```
 
-* Configuration
+2 作業フォルダに移動する
 
-* Database creation
+Railsプロジェクトのディレクトリに移動してください。
+```
+$ cd rails-docker
+```
 
-* Database initialization
+3 dockerをbuildする
+dockerのimageをビルドします。
+```
+$ docker-compose build
+```
 
-* How to run the test suite
+4 コンテナを作成して起動する
+コンテナをデタッチモードで作成・起動します。
+```
+$ docker-compose up -d
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+初回起動時は、以下のようにexecコマンドを用いて、DBを作成してください。
 
-* Deployment instructions
+```
+$ docker-compose exec web rails db:create
+```
 
-* ...
+その後、migrateも実行してください。
+
+```
+$ docker-compose exec web rails db:migrate
+```
+
+以上で環境構築が完了します。
+ブラウザで　
+http://localhost:3000　
+にアクセスすると、タスク管理のデモアプリが起動します。確認をしてみてください。
+
+# アプリの停止方法
+コンテナを停止するためにはdownのコマンドを使用してください。
+
+```
+$ docker-compose down
+```
